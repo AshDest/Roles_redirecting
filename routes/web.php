@@ -18,6 +18,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::prefix('admin')->middleware('auth')->group(function () {
+    Route::get('/dashbord', [App\Http\Controllers\AdminController::class, 'index'])->name('home');
+});
+
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
